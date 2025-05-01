@@ -1,3 +1,4 @@
+import importlib.resources as resources
 from pathlib import Path
 from typing import Literal
 
@@ -9,13 +10,17 @@ __all__ = [
 
 
 def _load_bankchurn() -> pd.DataFrame:
-    return pd.read_csv(
-        Path(__file__).parent / "data" / "bankchurn.csv",
-        decimal=".",
-        sep=",",
-        header=0,
-        index_col=False
-    )
+    with (
+        resources.files('moddata.data').joinpath('bankchurn.txt').open('r')
+        as f
+    ):
+        return pd.read_csv(
+            f,
+            decimal=".",
+            sep=",",
+            header=0,
+            index_col=False
+        )
 
 
 def load_data(
