@@ -1,6 +1,6 @@
 [project]
 name = "moddata"
-version = "0.0.2"
+version = "0.0.3"
 description = "Datasets for modeling"
 readme = "README.md"
 requires-python = ">=3.12"
