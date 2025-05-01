@@ -11,7 +11,7 @@ __all__ = [
 
 def _load_bankchurn() -> pd.DataFrame:
     with (
-        resources.files('moddata.data').joinpath('bankchurn.txt').open('r')
+        resources.files('moddata').joinpath('bankchurn.txt').open('r')
         as f
     ):
         return pd.read_csv(
