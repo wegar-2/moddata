@@ -1,3 +1,6 @@
 .venv
 .idea
 **/__pycache__/
+moddata/data/archive.zip
+.DS_Store
+moddata/data/btc.parquet

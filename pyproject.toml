@@ -22,4 +22,7 @@ build-backend = "setuptools.build_meta"
 package-dir = {"" = "."}
 
 [tool.setuptools.package-data]
-"moddata.data" = ["bankchurn.csv"]
+"moddata.data" = [
+    "bankchurn.csv",
+    "btc.zip"
+]

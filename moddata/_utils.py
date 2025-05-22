@@ -1,12 +1,17 @@
-import importlib.resources as resources
 from pathlib import Path
-from typing import Literal
+import shutil
+from typing import Literal, TypeAlias
+import zipfile
 
+import importlib.resources as resources
+import kagglehub
 import pandas as pd
 
 __all__ = [
     "load_data"
 ]
+
+Dataset: TypeAlias = Literal["bankchurn", "btc"]
 
 
 def _load_bankchurn() -> pd.DataFrame:
@@ -23,12 +28,43 @@ def _load_bankchurn() -> pd.DataFrame:
         )
 
 
-def load_data(
-        dataset: Literal["bankchurn"]
-) -> pd.DataFrame | None:
+def _load_btc():
+    path: Path = Path(kagglehub.dataset_download("prasoonkottarathil/btcinusd"))
+    datas: list[pd.DataFrame] = []
+    for p in path.glob("*min.csv"):
+        datas.append(
+            pd.read_csv(
+                p,
+                sep=",",
+                decimal=".",
+                usecols=[
+                    "date", "open", "high", "low", "close", "Volume BTC",
+                    "Volume USD"
+                ],
+                parse_dates=["date"]
+            )
+        )
+    data: pd.DataFrame = pd.concat(datas, axis=0)
+    data = data.rename(columns={
+        "date": "dt", "Volume BTC": "vol_btc", "Volume USD": "vol_usd"
+    })
+    data = data.sort_values("dt")
+    data = data.set_index("dt")
+    data = data[:"2021-12-31 23:59:00"]
+    shutil.rmtree(path=path)
+    return data
+
+
+def load_data(dataset: Dataset) -> pd.DataFrame | None:
     if dataset == "bankchurn":
         return _load_bankchurn()
+    elif dataset == "btc":
+        return _load_btc()
     else:
         raise ValueError(
             f"Encountered invalid dataset name: {dataset}"
         )
+
+
+if __name__ == "__main__":
+    _load_btc()
