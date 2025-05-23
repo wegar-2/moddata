@@ -24,5 +24,6 @@ package-dir = {"" = "."}
 [tool.setuptools.package-data]
 "moddata.data" = [
     "bankchurn.csv",
-    "btc.zip"
+    "btc.zip",
+    "pl_banking_stocks.parquet"
 ]

@@ -4,3 +4,4 @@
 moddata/data/archive.zip
 .DS_Store
 moddata/data/btc.parquet
+moddata/data/stooq_data/

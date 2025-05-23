@@ -1,7 +1,6 @@
 from pathlib import Path
 import shutil
 from typing import Literal, TypeAlias
-import zipfile
 
 import importlib.resources as resources
 import kagglehub
@@ -11,7 +10,11 @@ __all__ = [
     "load_data"
 ]
 
-Dataset: TypeAlias = Literal["bankchurn", "btc"]
+Dataset: TypeAlias = Literal[
+    "bankchurn",
+    "btc",
+    "pl_banking_stocks"
+]
 
 
 def _load_bankchurn() -> pd.DataFrame:
@@ -55,11 +58,21 @@ def _load_btc():
     return data
 
 
+def _load_pl_banking_stocks() -> pd.DataFrame:
+    with (
+        resources.files('moddata.data').joinpath('pl_banking_stocks.parquet')
+        as f
+    ):
+        return pd.read_parquet(f)
+
+
 def load_data(dataset: Dataset) -> pd.DataFrame | None:
     if dataset == "bankchurn":
         return _load_bankchurn()
     elif dataset == "btc":
         return _load_btc()
+    elif dataset == "pl_banking_stocks":
+        return _load_pl_banking_stocks()
     else:
         raise ValueError(
             f"Encountered invalid dataset name: {dataset}"
