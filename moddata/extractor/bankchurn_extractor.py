@@ -1,8 +1,6 @@
-from typing import Optional, TypeAlias
+import pandas as pd
 
 from moddata import load_data
-import pandas as pd
-from sklearn.model_selection import train_test_split
 
 
 class BankchurnExtractor:
