@@ -1,7 +1,8 @@
 # moddata
 
 ![CI](https://github.com/wegar-2/moddata/actions/workflows/python-tests.yml/badge.svg)
-![Python](https://img.shields.io/pypi/pyversions/moddata)
+![codecov](https://codecov.io/gh/wegar-2/moddata/branch/main/graph/badge.svg)
+
 
 Provides data for use in modeling.
 
