@@ -8,6 +8,7 @@ from sklearn.preprocessing import (
 from sklearn.compose import ColumnTransformer
 
 from moddata.src.constants import EncodingAndScalingModelType
+from moddata.sklearn_extensions.log_standard_scaler import LogStandardScaler
 
 
 class BankchurnTransformer:
@@ -29,7 +30,7 @@ class BankchurnTransformer:
         """
         self._train_size: float | int = train_size
         self._random_state: Optional[int] = random_state
-        self._encoding_model_type: Optional[EncodingAndScalingModelType] = (
+        self._encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType] = (
             encoding_and_scaling_model_type)
 
     @staticmethod
@@ -55,8 +56,12 @@ class BankchurnTransformer:
         return MinMaxScaler()
 
     @staticmethod
-    def _age_scaler():
-        pass
+    def _age_scaler() -> LogStandardScaler:
+        return LogStandardScaler()
+
+    @staticmethod
+    def _balance_scaler() -> LogStandardScaler:
+        return LogStandardScaler(shift=1E-6)
 
     def _get_column_transformer(
             self,
@@ -65,7 +70,8 @@ class BankchurnTransformer:
         if encoding_and_scaling_model_type == "tree_like":
             return ColumnTransformer(
                 transformers=[
-                    (),
+                    ("ohe_gender_encoder", self._ohe_gender_encoder(), ["gender"]),
+                    ("ohe_encode_country", self._ohe_encode_country(), ["country"])
                 ],
                 remainder="passthrough",
                 force_int_remainder_cols=False,
@@ -74,7 +80,12 @@ class BankchurnTransformer:
         elif encoding_and_scaling_model_type == "other":
             return ColumnTransformer(
                 transformers=[
-
+                    ("ohe_gender_encoder", self._ohe_gender_encoder(), ["gender"]),
+                    ("ohe_encode_country", self._ohe_encode_country(), ["country"]),
+                    ("credit_score_dist_scaler", self._credit_score_dist_scaler(), ["credit_score"]),
+                    ("estimated_salary_scaler", self._estimated_salary_scaler(), ["estimated_salary_scaler"]),
+                    ("age_scaler", self._age_scaler(), ["age"]),
+                    ("balance_scaler", self._balance_scaler(), ["balance"])
                 ],
                 remainder="passthrough",
                 force_int_remainder_cols=False,
@@ -89,22 +100,16 @@ class BankchurnTransformer:
             data: tuple[pd.DataFrame, pd.DataFrame]
     ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         X, y = data
-
         X_train, X_test, y_train, y_test = train_test_split(
             X,
             y,
             train_size=self._train_size,
             random_state=self._random_state
         )
+        if self._encoding_and_scaling_model_type is not None:
+            col_trfm: ColumnTransformer = self._get_column_transformer(
+                encoding_and_scaling_model_type=self._encoding_and_scaling_model_type
+            )
+            X_train, y_train = col_trfm.fit_transform(X=X_train, y=y_train)
+            X_test, y_test = col_trfm.transform(X=X_test, y=y_test)
         return X_train, X_test, y_train, y_test
-
-
-if __name__ == "__main__":
-
-    from moddata.extractor.bankchurn_extractor import BankchurnExtractor
-
-    data = BankchurnExtractor().extract()
-    BankchurnTransformer(
-        train_size=0.8,
-        random_state=1234
-    ).transform(data=data)
