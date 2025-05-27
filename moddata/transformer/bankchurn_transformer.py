@@ -3,8 +3,9 @@ from typing import Optional
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import (
-    OneHotEncoder, OrdinalEncoder, StandardScaler, MinMaxScaler
+    OneHotEncoder, StandardScaler, MinMaxScaler
 )
+from sklearn.compose import ColumnTransformer
 
 from moddata.src.constants import EncodingAndScalingModelType
 
@@ -17,6 +18,15 @@ class BankchurnTransformer:
             random_state: Optional[int] = None,
             encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType] = None,
     ):
+        """
+
+        Args:
+            train_size: parameter passed to the train_test_split method
+            used to create train and test datasets
+            random_state: analogous to train_size
+            encoding_and_scaling_model_type: Literal, defines what type of
+            model data should be prepared for
+        """
         self._train_size: float | int = train_size
         self._random_state: Optional[int] = random_state
         self._encoding_model_type: Optional[EncodingAndScalingModelType] = (
@@ -48,14 +58,28 @@ class BankchurnTransformer:
     def _age_scaler():
         pass
 
-    def _do_encoding_and_scaling(
+    def _get_column_transformer(
             self,
             encoding_and_scaling_model_type: EncodingAndScalingModelType
-    ):
+    ) -> ColumnTransformer:
         if encoding_and_scaling_model_type == "tree_like":
-            pass
+            return ColumnTransformer(
+                transformers=[
+                    (),
+                ],
+                remainder="passthrough",
+                force_int_remainder_cols=False,
+                verbose=False
+            )
         elif encoding_and_scaling_model_type == "other":
-            pass
+            return ColumnTransformer(
+                transformers=[
+
+                ],
+                remainder="passthrough",
+                force_int_remainder_cols=False,
+                verbose=False
+            )
         else:
             raise ValueError(f"Encountered unhandled "
                              f"{encoding_and_scaling_model_type=}")
