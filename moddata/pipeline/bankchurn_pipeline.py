@@ -1,30 +1,19 @@
-from typing import Final, Optional
-
-import pandas as pd
+from typing import Final
 
 from moddata.extractor.bankchurn_extractor import BankchurnExtractor
 from moddata.transformer.bankchurn_transformer import BankchurnTransformer
-from moddata.src.constants import EncodingAndScalingModelType
+from moddata.src.constants import TrainTestXyDataFrames
+from moddata.src.config import BankchurnPipelineConfig
 
 
 class BankchurnPipeline:
 
-    def __init__(
-            self,
-            train_size: float | int,
-            random_state: Optional[int] = None,
-            encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType] = None
-    ):
-        self._random_state: Optional[int] = random_state
-        self._encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType] = encoding_and_scaling_model_type
+    def __init__(self, config: BankchurnPipelineConfig):
+        self._config: Final[BankchurnPipelineConfig] = config
         self._transformer: Final[BankchurnTransformer] = (
-            BankchurnTransformer(
-                train_size=train_size,
-                random_state=random_state,
-                encoding_and_scaling_model_type=self._encoding_and_scaling_model_type
-            )
+            BankchurnTransformer(config=self._config)
         )
 
-    def run(self) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    def run(self) -> TrainTestXyDataFrames:
         x, y = BankchurnExtractor().extract()
         return self._transformer.transform(data=(x, y))

@@ -10,6 +10,7 @@ from sklearn.compose import ColumnTransformer
 from moddata.src.constants import EncodingAndScalingModelType
 from moddata.sklearn_extensions.log_standard_scaler import LogStandardScaler
 from moddata.src.config import BankchurnTransformerConfig
+from moddata.src.constants import TrainTestXyDataFrames
 
 
 class BankchurnTransformer:
@@ -82,7 +83,7 @@ class BankchurnTransformer:
     def transform(
             self,
             data: tuple[pd.DataFrame, pd.DataFrame]
-    ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    ) -> TrainTestXyDataFrames:
         X, y = data
         X_train, X_test, y_train, y_test = train_test_split(
             X, y,

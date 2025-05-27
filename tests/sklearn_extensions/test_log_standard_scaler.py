@@ -30,7 +30,6 @@ def test_log_standard_scaler_with_shift(make_log_normal_array):
 def test_log_standard_scaler_with_base(make_log_normal_array):
     lss: LogStandardScaler = LogStandardScaler(log_base=2)
     X_trfmd: np.ndarray = lss.fit_transform(X=make_log_normal_array)
-    # print(f"{X_trfmd=}")
     assert round(float(X_trfmd[0, 0]), 8) == -1.41835861
     assert X_trfmd.shape == (5, 1)
     assert round(float(X_trfmd[-1, 0]), 8) == -0.64893433
