@@ -1,6 +1,7 @@
 annotated-types==0.7.0
 certifi==2025.4.26
 charset-normalizer==3.4.2
+coverage==7.8.2
 cramjam==2.10.0
 fastparquet==2024.11.0
 fsspec==2025.5.0
@@ -16,6 +17,7 @@ pyarrow==20.0.0
 pydantic==2.11.5
 pydantic_core==2.33.2
 pytest==8.3.5
+pytest-cov==6.1.1
 python-dateutil==2.9.0.post0
 pytz==2025.2
 PyYAML==6.0.2

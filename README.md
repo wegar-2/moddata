@@ -1,5 +1,8 @@
 # moddata
 
+![CI](https://github.com/wegar-2/moddata/actions/workflows/python-tests.yml/badge.svg)
+![Python](https://img.shields.io/pypi/pyversions/moddata)
+
 Provides data for use in modeling.
 
 Interface consists of a single function ```load_data```. It accepts 
@@ -11,9 +14,19 @@ List of currently available datasets:
 3. `pl_banking_stocks` - daily prices of stocks of select 
 Polish banks for period 2005-01-01 through 2024-12-31 
 (data source: [stooq.com](https://stooq.com/))
-4. 
+
 
 To install this package run:
 ```
 pip install git+https://github.com/wegar-2/moddata.git@main
+```
+
+Run unit tests from the main package directory with:
+```
+pytest
+```
+
+Check tests coverage with:
+```
+pytest --cov=moddata tests/
 ```
