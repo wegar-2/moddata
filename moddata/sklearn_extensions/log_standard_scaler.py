@@ -9,7 +9,7 @@ class LogStandardScaler(TransformerMixin, BaseEstimator):
 
     def __init__(
             self,
-            shift: float = 1e-6,
+            shift: float = 0.0,
             log_base: float | int = np.e
     ):
         """
