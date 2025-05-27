@@ -1,12 +1,15 @@
 import numpy as np
 
 from moddata.pipeline.bankchurn_pipeline import BankchurnPipeline
+from moddata.src.config import BankchurnPipelineConfig
 
 
 def test_bankchurn_pipeline_run():
     X_train, X_test, y_train, y_test = BankchurnPipeline(
-        random_state=12345,
-        train_size=0.8
+        config=BankchurnPipelineConfig(
+            random_state=12345,
+            train_size=0.8
+        )
     ).run()
 
     assert X_train.shape == (8_000, 10)
