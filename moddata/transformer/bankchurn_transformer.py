@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Final
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -9,29 +9,13 @@ from sklearn.compose import ColumnTransformer
 
 from moddata.src.constants import EncodingAndScalingModelType
 from moddata.sklearn_extensions.log_standard_scaler import LogStandardScaler
+from moddata.src.config import BankchurnTransformerConfig
 
 
 class BankchurnTransformer:
 
-    def __init__(
-            self,
-            train_size: float | int,
-            random_state: Optional[int] = None,
-            encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType] = None,
-    ):
-        """
-
-        Args:
-            train_size: parameter passed to the train_test_split method
-            used to create train and test datasets
-            random_state: analogous to train_size
-            encoding_and_scaling_model_type: Literal, defines what type of
-            model data should be prepared for
-        """
-        self._train_size: float | int = train_size
-        self._random_state: Optional[int] = random_state
-        self._encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType] = (
-            encoding_and_scaling_model_type)
+    def __init__(self, config: BankchurnTransformerConfig):
+        self._config: Final[BankchurnTransformerConfig] = config
 
     @staticmethod
     def _ohe_gender_encoder() -> OneHotEncoder:
@@ -101,14 +85,13 @@ class BankchurnTransformer:
     ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         X, y = data
         X_train, X_test, y_train, y_test = train_test_split(
-            X,
-            y,
-            train_size=self._train_size,
-            random_state=self._random_state
+            X, y,
+            train_size=self._config.train_size,
+            random_state=self._config.random_state
         )
-        if self._encoding_and_scaling_model_type is not None:
+        if self._config.encoding_and_scaling_model_type is not None:
             col_trfm: ColumnTransformer = self._get_column_transformer(
-                encoding_and_scaling_model_type=self._encoding_and_scaling_model_type
+                encoding_and_scaling_model_type=self._config.encoding_and_scaling_model_type
             )
             X_train, y_train = col_trfm.fit_transform(X=X_train, y=y_train)
             X_test, y_test = col_trfm.transform(X=X_test, y=y_test)
