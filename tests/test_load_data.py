@@ -15,3 +15,18 @@ def test_load_data_bankchurn():
     assert data.at[17, "credit_card"] == np.int64(1)
 
 
+def test_load_data_btc():
+    data: pd.DataFrame = load_data(dataset="btc")
+    assert data.shape == (2_590_118, 6)
+    assert set(data.columns) == {
+        'open', 'high', 'low', 'close', 'vol_btc', 'vol_usd'
+    }
+    assert data.index[0] == pd.Timestamp("2017-01-01 00:01:00")
+
+
+def test_load_data_pl_banking_stocks():
+    data: pd.DataFrame = load_data(dataset="pl_banking_stocks")
+    assert data.shape == (5_003, 40)
+    assert set(data.columns.unique(0)) == {
+        'citi', 'bos', 'ing', 'mbank', 'mil', 'pekao', 'pkobp', 'santander'
+    }
