@@ -3,6 +3,8 @@
 ![CI](https://github.com/wegar-2/moddata/actions/workflows/python-tests.yml/badge.svg)
 ![codecov](https://codecov.io/gh/wegar-2/moddata/branch/main/graph/badge.svg)
 ![Lint](https://github.com/wegar-2/moddata/actions/workflows/lint.yml/badge.svg)
+![Pylint Check](https://github.com/wegar-2/moddata/actions/workflows/pylint.yml/badge.svg)
+
 
 Provides data for use in modeling.
 
