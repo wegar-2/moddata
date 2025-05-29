@@ -32,7 +32,8 @@ def _load_bankchurn() -> pd.DataFrame:
 
 
 def _load_btc():
-    path: Path = Path(kagglehub.dataset_download("prasoonkottarathil/btcinusd"))
+    path: Path = Path(
+        kagglehub.dataset_download("prasoonkottarathil/btcinusd"))
     datas: list[pd.DataFrame] = []
     for p in path.glob("*min.csv"):
         datas.append(

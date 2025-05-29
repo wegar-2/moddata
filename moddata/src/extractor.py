@@ -5,4 +5,3 @@ class Extractor(Protocol):
 
     def extract(self, *args, **kwargs):
         pass
-    

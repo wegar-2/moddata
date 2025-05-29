@@ -3,6 +3,7 @@ import pandas as pd
 from moddata import load_data
 from moddata.src.constants import XyDataFrames
 
+
 class BankchurnExtractor:
 
     def extract(self) -> XyDataFrames:

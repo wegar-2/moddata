@@ -1,4 +1,4 @@
-from typing import Any, Protocol, TypeAlias, Union
+from typing import Any, Protocol, TypeAlias
 
 import pandas as pd
 

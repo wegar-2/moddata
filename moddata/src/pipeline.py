@@ -5,4 +5,3 @@ class Pipeline(Protocol):
 
     def run(self) -> Any:
         pass
-    

@@ -3,7 +3,6 @@ from functools import reduce
 from pathlib import Path
 from typing import Final
 
-import numpy as np
 import pandas as pd
 
 
@@ -32,9 +31,9 @@ def _extract_stooq_datas(file_to_ticker: dict[str, str]) -> pd.DataFrame:
     for file, ticker in file_to_ticker.items():
         datas.append(_extract_stooq_data(file=file, ticker=ticker))
     data: pd.DataFrame = reduce(
-        lambda l, r: pd.merge(
-            left=l,
-            right=r,
+        lambda l_, r_: pd.merge(
+            left=l_,
+            right=r_,
             left_index=True,
             right_index=True,
             how="outer"

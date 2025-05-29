@@ -57,7 +57,9 @@ class LogStandardScaler(TransformerMixin, BaseEstimator):
 
     def transform(self, X: pd.DataFrame):
         if not isinstance(X, pd.DataFrame):
-            raise ValueError("This transformer only accepts pd.DataFrame input!")
+            raise ValueError(
+                "This transformer only accepts pd.DataFrame input!"
+            )
         X_log = self._log_transform(X=X)
         return self._standard_scaler.transform(X=X_log + self.shift)
 

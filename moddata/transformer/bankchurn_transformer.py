@@ -55,8 +55,10 @@ class BankchurnTransformer:
         if encoding_and_scaling_model_type == "tree_like":
             return ColumnTransformer(
                 transformers=[
-                    ("ohe_gender_encoder", self._ohe_gender_encoder(), ["gender"]),
-                    ("ohe_encode_country", self._ohe_encode_country(), ["country"])
+                    ("ohe_gender_encoder", self._ohe_gender_encoder(),
+                     ["gender"]),
+                    ("ohe_encode_country", self._ohe_encode_country(),
+                     ["country"])
                 ],
                 remainder="passthrough",
                 force_int_remainder_cols=False,
@@ -66,10 +68,20 @@ class BankchurnTransformer:
         elif encoding_and_scaling_model_type == "other":
             return ColumnTransformer(
                 transformers=[
-                    ("ohe_gender_encoder", self._ohe_gender_encoder(), ["gender"]),
-                    ("ohe_encode_country", self._ohe_encode_country(), ["country"]),
-                    ("credit_score_dist_scaler", self._credit_score_dist_scaler(), ["credit_score"]),
-                    ("estimated_salary_scaler", self._estimated_salary_scaler(), ["estimated_salary"]),
+                    ("ohe_gender_encoder", self._ohe_gender_encoder(),
+                     ["gender"]),
+                    ("ohe_encode_country", self._ohe_encode_country(),
+                     ["country"]),
+                    (
+                        "credit_score_dist_scaler",
+                        self._credit_score_dist_scaler(),
+                        ["credit_score"]
+                    ),
+                    (
+                        "estimated_salary_scaler",
+                        self._estimated_salary_scaler(),
+                        ["estimated_salary"]
+                    ),
                     ("age_scaler", self._age_scaler(), ["age"]),
                     ("balance_scaler", self._balance_scaler(), ["balance"])
                 ],
@@ -94,7 +106,9 @@ class BankchurnTransformer:
         )
         if self._config.encoding_and_scaling_model_type is not None:
             col_trfm: ColumnTransformer = self._get_column_transformer(
-                encoding_and_scaling_model_type=self._config.encoding_and_scaling_model_type
+                encoding_and_scaling_model_type=(
+                    self._config.encoding_and_scaling_model_type
+                )
             )
             col_trfm.fit(X=X_train)
             X_train = pd.DataFrame(
