@@ -21,3 +21,4 @@ def test_bankchurn_pipeline_tree_like():
     assert np.all(np.array(y_test.index[:3]) == np.array([7867, 1402, 8606]))
 
 
+test_bankchurn_pipeline_tree_like
