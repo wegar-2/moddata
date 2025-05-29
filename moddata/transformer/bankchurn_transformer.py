@@ -65,7 +65,7 @@ class BankchurnTransformer:
                 verbose=False,
                 verbose_feature_names_out=False
             )
-        elif encoding_and_scaling_model_type == "other":
+        if encoding_and_scaling_model_type == "other":
             return ColumnTransformer(
                 transformers=[
                     ("ohe_gender_encoder", self._ohe_gender_encoder(),
@@ -90,16 +90,16 @@ class BankchurnTransformer:
                 verbose=False,
                 verbose_feature_names_out=False
             )
-        else:
-            raise ValueError(f"Encountered unhandled "
-                             f"{encoding_and_scaling_model_type=}")
+        raise ValueError(
+            f"Encountered unhandled {encoding_and_scaling_model_type=}"
+        )
 
     def transform(
             self,
             data: tuple[pd.DataFrame, pd.DataFrame]
     ) -> TrainTestXyDataFrames:
-        X, y = data
-        X_train, X_test, y_train, y_test = train_test_split(
+        X, y = data # noqa
+        X_train, X_test, y_train, y_test = train_test_split( # noqa
             X, y,
             train_size=self._config.train_size,
             random_state=self._config.random_state
@@ -111,11 +111,11 @@ class BankchurnTransformer:
                 )
             )
             col_trfm.fit(X=X_train)
-            X_train = pd.DataFrame(
+            X_train = pd.DataFrame( # noqa
                 data=col_trfm.transform(X=X_train),
                 columns=col_trfm.get_feature_names_out()
             )
-            X_test = pd.DataFrame(
+            X_test = pd.DataFrame( # noqa
                 data=col_trfm.transform(X=X_test),
                 columns=col_trfm.get_feature_names_out()
             )

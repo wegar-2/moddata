@@ -3,3 +3,12 @@ repos:
     rev: 6.1.0  # or latest version
     hooks:
       - id: flake8
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint check
+        entry: pylint
+        language: system
+        types: [python]
+        args: [moddata]

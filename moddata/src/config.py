@@ -26,7 +26,7 @@ class BankchurnTransformerConfig(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
     train_size: float | int
-    random_state: Optional[int] = None,
+    random_state: Optional[int] = None
     encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType]
 
 

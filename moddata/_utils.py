@@ -2,7 +2,7 @@ from pathlib import Path
 import shutil
 from typing import Literal, TypeAlias
 
-import importlib.resources as resources
+from importlib import resources
 import kagglehub
 import pandas as pd
 
@@ -68,14 +68,11 @@ def _load_pl_banking_stocks() -> pd.DataFrame:
 def load_data(dataset: Dataset) -> pd.DataFrame | None:
     if dataset == "bankchurn":
         return _load_bankchurn()
-    elif dataset == "btc":
+    if dataset == "btc":
         return _load_btc()
-    elif dataset == "pl_banking_stocks":
+    if dataset == "pl_banking_stocks":
         return _load_pl_banking_stocks()
-    else:
-        raise ValueError(
-            f"Encountered invalid dataset name: {dataset}"
-        )
+    raise ValueError(f"Encountered invalid dataset name: {dataset}")
 
 
 if __name__ == "__main__":
