@@ -27,7 +27,7 @@ class BankchurnTransformerConfig(BaseModel):
 
     train_size: float | int
     random_state: Optional[int] = None,
-    encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType] = None
+    encoding_and_scaling_model_type: Optional[EncodingAndScalingModelType]
 
 
 BankchurnPipelineConfig: TypeAlias = BankchurnTransformerConfig

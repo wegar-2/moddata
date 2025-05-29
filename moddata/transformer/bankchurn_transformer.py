@@ -60,7 +60,8 @@ class BankchurnTransformer:
                 ],
                 remainder="passthrough",
                 force_int_remainder_cols=False,
-                verbose=False
+                verbose=False,
+                verbose_feature_names_out=False
             )
         elif encoding_and_scaling_model_type == "other":
             return ColumnTransformer(
@@ -74,7 +75,8 @@ class BankchurnTransformer:
                 ],
                 remainder="passthrough",
                 force_int_remainder_cols=False,
-                verbose=False
+                verbose=False,
+                verbose_feature_names_out=False
             )
         else:
             raise ValueError(f"Encountered unhandled "
@@ -94,6 +96,13 @@ class BankchurnTransformer:
             col_trfm: ColumnTransformer = self._get_column_transformer(
                 encoding_and_scaling_model_type=self._config.encoding_and_scaling_model_type
             )
-            X_train, y_train = col_trfm.fit_transform(X=X_train, y=y_train)
-            X_test, y_test = col_trfm.transform(X=X_test, y=y_test)
+            col_trfm.fit(X=X_train)
+            X_train = pd.DataFrame(
+                data=col_trfm.transform(X=X_train),
+                columns=col_trfm.get_feature_names_out()
+            )
+            X_test = pd.DataFrame(
+                data=col_trfm.transform(X=X_test),
+                columns=col_trfm.get_feature_names_out()
+            )
         return X_train, X_test, y_train, y_test
