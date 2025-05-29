@@ -69,7 +69,7 @@ class BankchurnTransformer:
                     ("ohe_gender_encoder", self._ohe_gender_encoder(), ["gender"]),
                     ("ohe_encode_country", self._ohe_encode_country(), ["country"]),
                     ("credit_score_dist_scaler", self._credit_score_dist_scaler(), ["credit_score"]),
-                    ("estimated_salary_scaler", self._estimated_salary_scaler(), ["estimated_salary_scaler"]),
+                    ("estimated_salary_scaler", self._estimated_salary_scaler(), ["estimated_salary"]),
                     ("age_scaler", self._age_scaler(), ["age"]),
                     ("balance_scaler", self._balance_scaler(), ["balance"])
                 ],

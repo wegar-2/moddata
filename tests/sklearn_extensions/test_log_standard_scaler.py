@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from pytest import fixture
 
 
@@ -41,3 +42,8 @@ def test_log_standard_scaler_with_shift_and_base(make_log_normal_array):
     assert round(float(X_trfmd[0, 0]), 8) == 7.12454284
     assert X_trfmd.shape == (5, 1)
     assert round(float(X_trfmd[-1, 0]), 8) == 7.1258186
+
+
+def test_use_of_log_standard_scaler_in_column_transformer(make_log_normal_array):
+    data: pd.DataFrame = pd.DataFrame(data={"X": make_log_normal_array})
+    lss: LogStandardScaler = LogStandardScaler(log_base=2, shift=20)
