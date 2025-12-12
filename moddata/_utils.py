@@ -15,7 +15,7 @@ Dataset: TypeAlias = Literal[
     "btc",
     "pl_banking_stocks",
     "sunspots",
-    "geomagnetic_indexes"
+    "geomagnetic_activity"
 ]
 
 
@@ -73,6 +73,13 @@ def _load_sunspots() -> pd.DataFrame:
     ))
 
 
+def _load_geomagnetic_activity() -> pd.DataFrame:
+    return pd.read_parquet(str(
+        resources.files('moddata.data').joinpath(
+            'geomagnetic_activity.parquet')
+    ))
+
+
 def load_data(dataset: Dataset) -> pd.DataFrame | None:
     if dataset == "bankchurn":
         return _load_bankchurn()
@@ -82,6 +89,6 @@ def load_data(dataset: Dataset) -> pd.DataFrame | None:
         return _load_pl_banking_stocks()
     if dataset == "sunspots":
         raise _load_sunspots()
-    if dataset == "geomagnetic_indexes":
-        raise Exception()
+    if dataset == "geomagnetic_activity":
+        raise _load_geomagnetic_activity()
     raise ValueError(f"Encountered invalid dataset name: {dataset}")

@@ -17,6 +17,8 @@ List of currently available datasets:
 3. `pl_banking_stocks` - daily prices of stocks of select 
 Polish banks for period 2005-01-01 through 2024-12-31 
 (data source: [stooq.com](https://stooq.com/))
+4. `sunspots` - daily total sunspot number data as per [SILSO](https://www.sidc.be/SILSO/datafiles)
+5. `geomagnetic_activity` - data on geomagnetic activity as per [GFZ Centre for Geosciences](https://kp.gfz.de/en/data) 
 
 
 To install this package run:

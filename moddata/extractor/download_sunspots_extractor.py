@@ -9,7 +9,8 @@ logger = logging.getLogger(__name__)
 
 class DownloadSunspotsExtractor:
 
-    _DAILY_TOTAL_SUNSPOT_NUMBER_URL: Final[str] = "https://www.sidc.be/SILSO/INFO/sndtotcsv.php"
+    _DAILY_TOTAL_SUNSPOT_NUMBER_URL: Final[str] = \
+        "https://www.sidc.be/SILSO/INFO/sndtotcsv.php"
 
     def extract(self) -> pd.DataFrame:
         data = pd.read_csv(
@@ -28,7 +29,7 @@ class DownloadSunspotsExtractor:
         data["day"] = (
                 data["year"].astype(str) + "-" +
                 data["month"].apply(lambda x: f"{x:02}") + "-" +
-                data["day"].apply( lambda x: f"{x:02}")
+                data["day"].apply(lambda x: f"{x:02}")
         )
         data = data[["day", "daily_sunspots_number"]]
         data["daily_sunspots_number"] = np.where(
