@@ -7,3 +7,4 @@ moddata/data/btc.parquet
 moddata/data/stooq_data/
 sandbox.py
 .coverage
+moddata.egg-info
