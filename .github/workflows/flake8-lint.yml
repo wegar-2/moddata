@@ -18,6 +18,10 @@ jobs:
         with:
           python-version-file: "pyproject.toml"
 
+      - name: Activate uv
+        run: |
+          source .uv/bin/activate
+
       - name: Install dependencies
         run: |
           uv sync
