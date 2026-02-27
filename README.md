@@ -1,5 +1,6 @@
 # moddata
 
+![Flake8 Lint Check](https://github.com/wegar-2/moddata/actions/workflows/ruff-lint.yml/badge.svg)
 ![CI](https://github.com/wegar-2/moddata/actions/workflows/python-tests.yml/badge.svg)
 ![codecov](https://codecov.io/gh/wegar-2/moddata/branch/main/graph/badge.svg)
 
