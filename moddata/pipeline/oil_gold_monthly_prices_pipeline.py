@@ -46,7 +46,3 @@ class OilGoldMonthlyPricesPipeline:
                 "world_bank_oil_gold_monthly_prices.parquet"
             )
         )
-
-
-if __name__ == "__main__":
-    OilGoldMonthlyPricesPipeline().run()
