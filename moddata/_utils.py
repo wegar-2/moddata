@@ -88,7 +88,9 @@ def load_data(dataset: Dataset) -> pd.DataFrame | None:
     if dataset == "pl_banking_stocks":
         return _load_pl_banking_stocks()
     if dataset == "sunspots":
-        raise _load_sunspots()
+        return _load_sunspots()
     if dataset == "geomagnetic_activity":
-        raise _load_geomagnetic_activity()
+        return _load_geomagnetic_activity()
+    if dataset == "world_bank_oil_gold_monthly_prices":
+        raise NotImplementedError
     raise ValueError(f"Encountered invalid dataset name: {dataset}")
