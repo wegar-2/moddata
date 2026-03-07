@@ -37,5 +37,6 @@ package-dir = {"" = "."}
 "moddata.data" = [
     "bankchurn.csv",
     "btc.zip",
-    "pl_banking_stocks.parquet"
+    "pl_banking_stocks.parquet",
+    "world_bank_oil_gold_monthly_prices.parquet"
 ]
