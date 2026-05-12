@@ -38,5 +38,6 @@ package-dir = {"" = "."}
     "bankchurn.csv",
     "btc.zip",
     "pl_banking_stocks.parquet",
+    "sunspots.parquet",
     "world_bank_oil_gold_monthly_prices.parquet"
 ]
