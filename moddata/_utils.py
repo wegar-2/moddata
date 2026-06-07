@@ -14,6 +14,7 @@ Dataset: TypeAlias = Literal[
     "bankchurn",
     "btc",
     "pl_banking_stocks",
+    "spx_1901-2025",
     "sunspots",
     "geomagnetic_activity",
     "world_bank_oil_gold_monthly_prices"
@@ -64,27 +65,31 @@ def _load_btc():
 
 def _load_pl_banking_stocks() -> pd.DataFrame:
     return pd.read_parquet(str(
-        resources.files('moddata.data').joinpath('pl_banking_stocks.parquet')
+        resources.files('moddata.data').joinpath('pl_banking_stocks.parquet') # noqa
     ))
 
 
 def _load_sunspots() -> pd.DataFrame:
     return pd.read_parquet(str(
-        resources.files('moddata.data').joinpath('sunspots.parquet')
+        resources.files('moddata.data').joinpath('sunspots.parquet') # noqa
     ))
 
 
 def _load_geomagnetic_activity() -> pd.DataFrame:
     return pd.read_parquet(str(
-        resources.files('moddata.data').joinpath(
-            'geomagnetic_activity.parquet')
+        resources.files('moddata.data').joinpath('geomagnetic_activity.parquet') # noqa
     ))
 
 
 def _load_world_bank_oil_gold_monthly_prices() -> pd.DataFrame:
     return pd.read_parquet(str(
-        resources.files('moddata.data').joinpath(
-            'world_bank_oil_gold_monthly_prices.parquet')
+        resources.files('moddata.data').joinpath('world_bank_oil_gold_monthly_prices.parquet') # noqa
+    ))
+
+
+def _load_spx_1901_to_2025() -> pd.DataFrame:
+    return pd.read_parquet(str(
+        resources.files('moddata.data').joinpath('spx_1901-2025.parquet')  # noqa
     ))
 
 
@@ -101,4 +106,6 @@ def load_data(dataset: Dataset) -> pd.DataFrame | None:
         return _load_geomagnetic_activity()
     if dataset == "world_bank_oil_gold_monthly_prices":
         return _load_world_bank_oil_gold_monthly_prices()
+    if dataset == "spx_1901-2025":
+        return _load_spx_1901_to_2025()
     raise ValueError(f"Encountered invalid dataset name: {dataset}")
