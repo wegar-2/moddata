@@ -1,6 +1,6 @@
 [project]
 name = "moddata"
-version = "0.0.3"
+version = "0.0.4"
 description = "Datasets for modeling"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -40,5 +40,6 @@ package-dir = {"" = "."}
     "btc.zip",
     "pl_banking_stocks.parquet",
     "sunspots.parquet",
-    "world_bank_oil_gold_monthly_prices.parquet"
+    "world_bank_oil_gold_monthly_prices.parquet",
+    "spx_1901-2025.parquet"
 ]
