@@ -17,7 +17,8 @@ Dataset: TypeAlias = Literal[
     "spx_1901-2025",
     "sunspots",
     "geomagnetic_activity",
-    "world_bank_oil_gold_monthly_prices"
+    "world_bank_oil_gold_monthly_prices",
+    "eurpln_regime"
 ]
 
 
@@ -92,6 +93,11 @@ def _load_spx_1901_to_2025() -> pd.DataFrame:
         resources.files('moddata.data').joinpath('spx_1901-2025.parquet')  # noqa
     ))
 
+def _load_eurpln_regime() -> pd.DataFrame:
+    return pd.read_parquet(str(
+        resources.files('moddata.data').joinpath('eurpln_regime.parquet')  # noqa
+    ))
+
 
 def load_data(dataset: Dataset) -> pd.DataFrame | None:
     if dataset == "bankchurn":
@@ -108,4 +114,6 @@ def load_data(dataset: Dataset) -> pd.DataFrame | None:
         return _load_world_bank_oil_gold_monthly_prices()
     if dataset == "spx_1901-2025":
         return _load_spx_1901_to_2025()
+    if dataset == "eurpln_regime":
+        return _load_eurpln_regime()
     raise ValueError(f"Encountered invalid dataset name: {dataset}")

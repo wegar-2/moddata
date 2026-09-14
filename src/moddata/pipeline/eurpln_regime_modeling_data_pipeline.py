@@ -53,9 +53,14 @@ class EURPLNRegimeModelingDataPipeline:
         )
         data = data[f"{self._start:%Y-%m-%d}":f"{self._end:%Y-%m-%d}"]
         data = data.ffill().bfill()
-        return data
+
+        data.to_parquet(
+            Path(__file__).parent.parent /
+            "data" /
+            "eurpln_regime.parquet",
+            engine="pyarrow"
+        )
 
 
 if __name__ == "__main__":
-    data = EURPLNRegimeModelingDataPipeline().run()
-    print("halt! ")
+    EURPLNRegimeModelingDataPipeline().run()
