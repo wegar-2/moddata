@@ -1,5 +1,6 @@
-from src.moddata._utils import load_data
-from src.moddata.dg.dg import make_milisec_data
+from moddata._utils import load_data
+from moddata.dg.dg import make_milisec_data
+
 
 __all__ = [
     "load_data",
