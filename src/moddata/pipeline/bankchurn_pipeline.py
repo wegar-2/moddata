@@ -2,8 +2,8 @@ from typing import Final
 
 from moddata.extractor.bankchurn_extractor import BankchurnExtractor
 from moddata.transformer.bankchurn_transformer import BankchurnTransformer
-from moddata.src.constants import TrainTestXyDataFrames
-from moddata.src.config import BankchurnPipelineConfig
+from moddata.common.constants import TrainTestXyDataFrames
+from moddata.common.config import BankchurnPipelineConfig
 
 
 class BankchurnPipeline:

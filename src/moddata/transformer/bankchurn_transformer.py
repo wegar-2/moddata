@@ -7,10 +7,10 @@ from sklearn.preprocessing import (
 )
 from sklearn.compose import ColumnTransformer
 
-from moddata.src.constants import EncodingAndScalingModelType
+from moddata.common.constants import (
+    EncodingAndScalingModelType, TrainTestXyDataFrames)
 from moddata.sklearn_extensions.log_standard_scaler import LogStandardScaler
-from moddata.src.config import BankchurnTransformerConfig
-from moddata.src.constants import TrainTestXyDataFrames
+from moddata.common.config import BankchurnTransformerConfig
 
 
 class BankchurnTransformer:
