@@ -3,7 +3,7 @@ from datetime import date, datetime, time, timedelta
 import numpy as np
 import pandas as pd
 
-from moddata.src.constants import MICRO_SECS_PER_DAY
+from moddata.common.constants import MICRO_SECS_PER_DAY
 
 
 def make_milisec_data(
