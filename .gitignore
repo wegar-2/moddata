@@ -4,8 +4,8 @@
 src/moddata/data/archive.zip
 .DS_Store
 src/moddata/data/btc.parquet
-src/moddata/data/stooq_data/*
-src/moddata/data/regime_model_data/*
+src/moddata/data/stooq_data
+src/moddata/data/regime_model_data
 sandbox.py
 .coverage
 moddata.egg-info
