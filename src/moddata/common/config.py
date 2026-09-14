@@ -7,7 +7,7 @@ from typing import Optional, TypeAlias
 
 from pydantic import BaseModel, ConfigDict
 
-from moddata.src.constants import EncodingAndScalingModelType
+from moddata.common.constants import EncodingAndScalingModelType
 
 __all__ = [
     "BankchurnTransformerConfig",

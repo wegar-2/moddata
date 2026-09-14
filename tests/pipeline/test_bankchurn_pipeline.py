@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 from moddata.pipeline.bankchurn_pipeline import BankchurnPipeline
-from moddata.src.config import BankchurnPipelineConfig
+from moddata.common.config import BankchurnPipelineConfig
 
 
 def test_bankchurn_pipeline_tree_like_model():
